@@ -1,0 +1,16 @@
+build/**
+dist/**
+.LCK*
+*.class
+.DS_Store
+package/**
+configuration.yaml
+media.jar
+help.jar
+Info.plist
+windows-exe.xml
+help/publish
+license.key
+tools/vision-3.4.0/exports/HCS-NG.theme.zip
+lib/java/jruby-complete.jar
+_run.sh

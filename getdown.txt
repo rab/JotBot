@@ -1,0 +1,62 @@
+# This indicates the version of the application defined by this
+# Getdown deployment file. It must be a single integer. If this
+# is omitted, this is assumed to be a non-versioned application
+# deployment.
+version = 106
+
+# This defines the URL from which everything is downloaded. In a
+# versioned application deployment, this path must contain the version
+# number as %VERSION%.
+appbase = http://getjotbot.com/updates/version/%VERSION%
+
+# The code resources are all specified relative to the appbase and are
+# installed with the same path, but relative to the application
+# deployment directory. These jar files are all placed in the classpath
+# when invoking your application. Your application's deployment
+# classfile may reside in any of these files, it need not be the first.
+code = JotBot.jar
+code = data.jar
+code = help_files.jar
+code = lib/java/bcmail-jdk14-139.jar
+code = lib/java/bcprov-jdk14-139.jar
+code = lib/java/h2.jar
+code = lib/java/filters.jar
+code = lib/java/getdown-pro.jar
+code = lib/java/jdbc_adapter_internal.jar
+code = lib/java/jh.jar
+code = lib/java/jopenssl.jar
+code = lib/java/jruby-complete.jar
+code = lib/java/jsearch.jar
+code = lib/java/jxlayer.jar
+code = lib/java/monkeybars-0.6.4.jar
+code = lib/java/swing-layout-1.0.3.jar
+code = lib/java/swingx-0.9.3.jar
+code = lib/java/jdic/jdic.jar
+
+# The resources are all specified relative to the appbase and are
+# installed with the same path, but relative to the application
+# deployment directory.
+#resource = media/foo.jar
+
+# resource = JotBot.exe
+
+# These options are passed to the JVM before the specification of the
+# application on the command line. Herein one would specify things like
+# maximum heap size or -Xdisable_annoying_bugs, etc. Additionally, system
+# properties should be defined here. Note that %APPDIR% will be replaced
+# with the current application deployment directory.
+#jvmarg = -Xmx128M
+#jvmarg = -Dmonkeys=true
+#jvmarg = -Dappdir=%APPDIR%
+
+# This defines the main class of your application. This should contain a
+# main() function which will be the entry point to your code.
+class = org.rubyforge.rawr.Main
+
+# These arguments are passed to your application at invocation time. Note
+# that %APPDIR% will be replaced with the current application deployment
+# directory.
+#apparg = peanuts
+#apparg = %APPDIR%
+
+ui.name = JotBot Updater

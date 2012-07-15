@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE map PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 2.0//EN"
+                     "http://java.sun.com/products/javahelp/map_2_0.dtd">
+
+<map version="1.0">
+	<mapID target="Tour" url="Tour.html"/>
+	<mapID target="Linux_system_tray" url="images/Linux_system_tray.png"/>
+	<mapID target="OSX_system_tray" url="images/OSX_system_tray.png"/>
+	<mapID target="Parallels Picture" url="images/Parallels Picture.png"/>
+	<mapID target="Tour_custom_log_entry" url="images/Tour_custom_log_entry.png"/>
+	<mapID target="Tour_menu" url="images/Tour_menu.png"/>
+	<mapID target="Tour_timelog1" url="images/Tour_timelog1.png"/>
+	<mapID target="Tour_timelog2" url="images/Tour_timelog2.png"/>
+	<mapID target="Tour_timelog3" url="images/Tour_timelog3.png"/>
+	<mapID target="Windows_system_tray" url="images/Windows_system_tray.png"/>
+	<mapID target="add" url="images/add.png"/>
+	<mapID target="calendar" url="images/calendar.png"/>
+	<mapID target="pencil_1" url="images/pencil_1.png"/>
+	<mapID target="pencil_2" url="images/pencil_2.png"/>
+	<mapID target="spinner" url="images/spinner.gif"/>
+	<mapID target="subtract" url="images/subtract.png"/>
+	<mapID target="getting_started" url="getting_started.html"/>
+	<mapID target="Linux System Tray" url="images/Linux_system_tray.png"/>
+</map>
