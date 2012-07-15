@@ -88,7 +88,7 @@ class SystemTrayView < ApplicationView
 
     # http://www.igniterealtime.org/community/message/146529
     @tray = java.awt.SystemTray.system_tray
-    # @tray.always_on_top = true  # Doesn't seemt o matter on Windows, where a problem was reported JGB
+    # @tray.always_on_top = true  # Doesn't seem to matter on Windows, where a problem was reported JGB
     tray_icon = java.awt.TrayIcon.new(ImageIcon.new(url).getImage, "JotBot", menu)
     @tray.add tray_icon 
 

@@ -22,18 +22,17 @@ END_KEY
   attr_accessor :private_key_path
 
   def initialize
-    @public_key = OpenSSL::PKey::RSA.new(PUBLIC_KEY)
+    @public_key = OpenSSL::PKey::RSA.new PUBLIC_KEY
     @expiration_date = nil
     @private_key_path = private_key_path
     @encoded_key = nil
-    # @private_key = OpenSSL::PKey::RSA.new(File.read private_key_path) if @private_key_path 
   end
 
-  def encoded_key=(key)
+  def encoded_key= key
     @encoded_key = key
   end
 
-  def private_key_path=(private_key_path)
+  def private_key_path= private_key_path
     @private_key_path = private_key_path
     @private_key = OpenSSL::PKey::RSA.new(File.read private_key_path) 
   end 
@@ -41,12 +40,12 @@ END_KEY
   def expiration_date 
     return @expiration_date unless @expiration_date.nil?
     raise "Cannot check for epiration date without license text." if @encoded_key.nil?
-    valid_license_text?(@encoded_key)
+    valid_license_text? @encoded_key
     @expiration_date
   end
 
   # Validates encode file contents, and stores encode value in @encoded_key
-  def valid_license_file?(license_key_file)
+  def valid_license_file? license_key_file
     return false unless File.exists?(license_key_file)  
 
     begin
@@ -66,11 +65,11 @@ END_KEY
     !@expiration_date.nil?
   end
 
-  def validate_license(text)
+  def validate_license text
     valid = true
     message = 'Valid license key'
 
-    plain_text = decrypt_text(text)
+    plain_text = decrypt_text text
     LOGGER.info "Validating license: #{plain_text.inspect}"
     return [false, 'License is invalid or corrupt'] if plain_text.nil?
 

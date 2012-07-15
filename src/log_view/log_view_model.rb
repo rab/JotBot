@@ -10,26 +10,11 @@ class LogViewModel
   end
 
   def load_log_data
-    # It sin't clrar if any ode is using this for its return value, but it does seem
+    # It isn't clear if any code is using this for its return value, but it does seem
     # that code is counting on @logs
     return(@logs = all_logs) if @filter_selection_model.current_report_is_empty?
 
     filter, joins = @filter_selection_model.current_report.build_filter
-
-
-    #if filter.empty?
-    #  puts 'no filter'
-    #  @logs = Timelog.dataset.order(:end_time.desc).all
-    #else
-    #  if joins.empty?
-    #    puts 'no joins'
-    #    @logs = Timelog.filter(filter).order(:end_time.desc).all
-    #  else
-    #    puts 'Joins'
-    #    @logs = Timelog.filter(filter).order(:end_time.desc).all # :joins => joins)
-    #  end
-    #end
-
 
     if filter.empty?
       Timelog.dataset.all
