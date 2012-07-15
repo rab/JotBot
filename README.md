@@ -73,12 +73,12 @@ You may get prompted to enter a licence key.
 Paste in this text:
 
 
-`Xvlcy7/2HGPlcL6BVQp1LfyYpxnKCgYzatVOAv7C6vqJjAgrnhC5K9UNm46V
-FeAFU5wK8X6k1HSJL+hZCbQei/8WmIL45yfp1zIijsZRR1/J2srdpZ9/eaTx
-oIUb3LEkPchjL6zplaJDZCyWpuhzhlxA5AMtvT+Ksd7k0TyKgdEg6yFaJzSV
-oc5tQInfh9jsHNjOdnF0/Y0dmyeMxkV2Y/8NJ2ERhSn7r0m3MOQ0vjjhdWSn
-Lptw8Ou2pJCQqvRErww0upYyOMtUx067TaU1La2iYBSDgT1zsyvjkhXXLXDb
-hIwFXIkcPLMltt/3U0FkZHpE5yrTxQjdP1C0Jxtcdw==`
+    `Xvlcy7/2HGPlcL6BVQp1LfyYpxnKCgYzatVOAv7C6vqJjAgrnhC5K9UNm46V
+    FeAFU5wK8X6k1HSJL+hZCbQei/8WmIL45yfp1zIijsZRR1/J2srdpZ9/eaTx
+    oIUb3LEkPchjL6zplaJDZCyWpuhzhlxA5AMtvT+Ksd7k0TyKgdEg6yFaJzSV
+    oc5tQInfh9jsHNjOdnF0/Y0dmyeMxkV2Y/8NJ2ERhSn7r0m3MOQ0vjjhdWSn
+    Lptw8Ou2pJCQqvRErww0upYyOMtUx067TaU1La2iYBSDgT1zsyvjkhXXLXDb
+    hIwFXIkcPLMltt/3U0FkZHpE5yrTxQjdP1C0Jxtcdw==`
 
 
 That might work.  Or change the code to stop asking for a key.
