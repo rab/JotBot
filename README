@@ -1,5 +1,5 @@
 rvm install jruby
-# change build_configuration.rb target from 1.7 to 1.6
+# changed build_configuration.rb target from 1.7 to 1.6
 rawr install
 rake rawr:base_jar
 rake rawr:build_extra_jars
@@ -8,13 +8,13 @@ rake create_digest
 rake rawr:jar
 rake rawr:bundle:app
 rake installer:mac
-# fix for bundler class name conflict till rawr gem is updated
-# $HOME/.rvm/gems/jruby-1.6.7.2@jotbot/gems/rawr-1.4.5/lib/app_bundler.rb
-# Object.send(:remove_const, :Bundler) rescue nil¬
-# require File.expand_path(File.join(File.dirname(__FILE__),'bundler'))¬
 
 run with
 
 java -jar package/jar/JotBot.jar
 
-till I can get the dmg to build properly. (at least it doesn't crash like the current dmg)
+or 
+
+open package/osx/JotBot.app
+
+dmg still doesn't build properly, but I updated it
