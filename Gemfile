@@ -1,10 +1,13 @@
+# ruby "1.8.7", :engine => "jruby", :engine_version => "1.6.7.2"
 source "https://rubygems.org"
+source "http://gems.neurogami.com"
 
-# https://github.com/mathias/rawr/commit/2936806e0dd71b91dc277c6f625bc10cfae048de
-gem 'rawr', :git => 'git://github.com/bf4/rawr.git'
+
+gem 'jruby-openssl'
+gem 'rawr', '1.6.4'
+gem 'monkeybars'
 gem 'rspec', '1.3'
 gem 'prawn'
 gem 'fastercsv'
-gem 'monkeybars'
 
 
