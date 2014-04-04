@@ -17,7 +17,7 @@ configuration do |c|
   c.java_lib_dirs = []
   c.files_to_copy = (Dir.glob('lib/java/jdic/**/*') - Dir.glob('lib/java/jdic/*.jar')).reject {|file| File.directory? file}
   
-  c.target_jvm_version = 1.7
+  c.target_jvm_version = 1.6
  # c.minimum_windows_jvm_version = 1.6
   c.jars[:data] = { :directory => 'data/images', :location_in_jar => 'images', :exclude => /tray/}
   c.jars[:help_files] = { :directory => 'help'}

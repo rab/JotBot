@@ -1,0 +1,20 @@
+rvm install jruby
+# changed build_configuration.rb target from 1.7 to 1.6
+rawr install
+rake rawr:base_jar
+rake rawr:build_extra_jars
+rake rawr:compile
+rake create_digest
+rake rawr:jar
+rake rawr:bundle:app
+rake installer:mac
+
+run with
+
+java -jar package/jar/JotBot.jar
+
+or 
+
+open package/osx/JotBot.app
+
+dmg still doesn't build properly, but I updated it
