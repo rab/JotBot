@@ -3,7 +3,7 @@ require 'filter_selection_controller'
 class LogViewController < ApplicationController
   set_model 'LogViewModel'
   set_view 'LogViewView'
-  
+
   add_listener :type => :list_selection, :components => {"report_area.selection_model" => :report_area}
 
   def load
@@ -14,11 +14,11 @@ class LogViewController < ApplicationController
     model.filter_selection_model = filter_controller.send(:model)
     model.load_log_data
   end
-  
+
   def ok_button_action_performed
     close
   end
-  
+
   def report_area_mouse_clicked(event)
     if 2 == event.click_count && event.button == java.awt.event.MouseEvent::BUTTON1
       if event.source.selected_row > -1

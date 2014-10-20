@@ -28,7 +28,7 @@ require 'application_view'
 #
 # Add your own application-wide libraries below.  To include jars, append to
 # $CLASSPATH, or use add_to_classpath, for example:
-# 
+#
 # $CLASSPATH << File.expand_path(File.dirname(__FILE__) + "/../lib/swing-layout-1.0.3.jar")
 #
 # or
@@ -53,4 +53,3 @@ when Monkeybars::Resolver::IN_JAR_FILE
 end
 
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__) + "/../lib/ruby")
-

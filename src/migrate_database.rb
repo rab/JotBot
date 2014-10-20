@@ -1,13 +1,9 @@
 # This file is used internally by the Database Manager to create and/or update
 # the tables in the database.  The determination on weather or not to run
-# any migrations is based on the one row in the version column inside the 
+# any migrations is based on the one row in the version column inside the
 # schema_info table.
 
 require 'sequel_model'
-
-
-
-
 
 # Consider using alas_method to munger column vlaues and passing them
 # on to the orignal method
@@ -21,14 +17,13 @@ require 'sequel_model'
 #        end
 #        original_initialize values, from_db, &block
 #      end
-#    
-
+#
 
 #    # Create the column accessors
 #    def self.def_column_accessor(*columns) # :nodoc:
 #      include(@column_accessors_module = Module.new) unless @column_accessors_module
 #      # Fix the UPCASE thing:
-#      columns.map!{|c| c.to_s.downcase.intern } 
+#      columns.map!{|c| c.to_s.downcase.intern }
 
 #      columns.each do |column|
 #        im = instance_methods.collect{|x| x.to_s}
@@ -39,7 +34,7 @@ require 'sequel_model'
 #            define_method(meth) do |*v|
 #              len = v.length
 #              raise(ArgumentError, "wrong number of arguments (#{len} for 1)") unless len == 1
-#              self[column] = v.first 
+#              self[column] = v.first
 #            end
 #          end
 #        end
@@ -57,10 +52,10 @@ unless database.table_exists? :schema_info
     column :version, :integer
   end
 
-  database[:schema_info] << {:version => 0} 
+  database[:schema_info] << {:version => 0}
 end
 
-schema_version = database[:schema_info].first  ? database[:schema_info].first[:version] : 0 
+schema_version = database[:schema_info].first  ? database[:schema_info].first[:version] : 0
 
 if schema_version < 1
   database.create_table :timelogs do
@@ -113,32 +108,32 @@ if schema_version < 4
   end
 
   class ReportFilter < Sequel::Model
-     many_to_one :reports
+    many_to_one :reports
   end
 
   # Create the filters
-   
+
   yesterday_rf = ReportFilter.new(:filter_type => "date", :parameter => "yesterday")
   today_rf  =  ReportFilter.create(:filter_type => "date", :parameter => "today" )
 
   if  yesterday_rf.parameter == "today"
-    raise "Failed to correctly create associated  filter for yesterday" 
+    raise "Failed to correctly create associated  filter for yesterday"
   end
 
   yesterday_rf.save # = ReportFilter.new(:filter_type => "date", :parameter => "yesterday")
 
   if  yesterday_rf.parameter == "today"
-    raise "Failed to correctly create associated  filter for yesterday" 
+    raise "Failed to correctly create associated  filter for yesterday"
   end
 
   # Now do the reports
-    database.create_table :reports do
+  database.create_table :reports do
     primary_key :id
     column :name, :varchar, :null => false
   end
 
   class Report < Sequel::Model
-     one_to_many :report_filters
+    one_to_many :report_filters
   end
 
   today = Report.create(:name => "Date is today")
@@ -150,7 +145,7 @@ if schema_version < 4
   yesterday.save
   yesterday.add_report_filter(yesterday_rf)
 
-  raise "Failed to correctly save assoicated   filter for yesterday" unless yesterday.report_filters.size > 0 
+  raise "Failed to correctly save assoicated   filter for yesterday" unless yesterday.report_filters.size > 0
   yesterday.save
   raise "Failed to correctly save assoicated   filter for yesterday" unless yesterday.report_filters.size  == 1
   raise "Failed to correctly save assoicated   filter for yesterday" if  yesterday.report_filters.first.parameter == "today"

@@ -1,7 +1,6 @@
 module Neurogami
   module TimeHelpers
 
-
     def hours_to_hours_minutes_seconds hours
       duration_in_seconds  = (hours * 60.0 * 60.0).to_f
       seconds_as_hhmmss duration_in_seconds

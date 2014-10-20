@@ -28,35 +28,30 @@ class LicenseKeyView < ApplicationView
   # Likely not needed
   def set_default_text
     #link_label.text = "<html><h4>Welcome to JotBot</h4></html>"
-#    link_label.text = "<html>Click here to purchase a JotBot license key: <a href='http://buy.getjotbot.com'>buy.getjotbot.com</a></html>"
-#    body_label.text = "<html>Please copy and paste the license key that was emailed to you when you purchased JotBot<br><br>
- #       If you did not recieve your key or if you need to request your key again, please email support@getjotbot.com </html> "
+    #    link_label.text = "<html>Click here to purchase a JotBot license key: <a href='http://buy.getjotbot.com'>buy.getjotbot.com</a></html>"
+    #    body_label.text = "<html>Please copy and paste the license key that was emailed to you when you purchased JotBot<br><br>
+    #       If you did not recieve your key or if you need to request your key again, please email support@getjotbot.com </html> "
   end
 
-
-  
-
 =begin
-Cursor cur = new Cursor ( Cursor.WAIT_CURSOR ) ;
-?.setCursor ( cur ) ;
+     Cursor cur = new Cursor ( Cursor.WAIT_CURSOR ) ;
+     ?.setCursor ( cur ) ;
 
-Cursor cur2 = new Cursor ( Cursor.CROSSHAIR_CURSOR ) ;
-?.setCursor ( cur2 ) ;
+     Cursor cur2 = new Cursor ( Cursor.CROSSHAIR_CURSOR ) ;
+     ?.setCursor ( cur2 ) ;
 
-Cursor cur3 = new Cursor ( Cursor.HAND_CURSOR ) ;
+     Cursor cur3 = new Cursor ( Cursor.HAND_CURSOR ) ;
 
-Image img = getImage( getCodeBase(), "pic.gif"  );
-Cursor cuscur =
- Toolkit.getDefaultToolkit().createCustomCursor
-  ( img, new Point(0,0), "ourkersr" );
-?.setCursor( cuscur );
+     Image img = getImage( getCodeBase(), "pic.gif"  );
+     Cursor cuscur =
+       Toolkit.getDefaultToolkit().createCustomCursor
+     ( img, new Point(0,0), "ourkersr" );
+     ?.setCursor( cuscur );
 
 =end
-    # http://www.java-tips.org/java-se-tips/javax.swing/how-to-change-mouse-cursor-during-mouse-over-action-on-hyper.html 
+  # http://www.java-tips.org/java-se-tips/javax.swing/how-to-change-mouse-cursor-during-mouse-over-action-on-hyper.html
   def hand_cursor(model, transfer)
-
-#   cursor = java.javax.awt.Cursor.new( java.javax.awtCursor::HAND_CURSOR ) 
-
+    #   cursor = java.javax.awt.Cursor.new( java.javax.awtCursor::HAND_CURSOR )
   end
 
   def set_usage_text(model, transfer)

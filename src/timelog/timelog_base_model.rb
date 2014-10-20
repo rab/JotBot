@@ -70,7 +70,7 @@ module TimelogBaseModel
     rescue Exception => e
       LOGGER.warn "Error finding timelog with id #{log_id}"
       raise
-     end
+    end
     if time_ranges_overlap?((last_log.start_time..last_log.end_time), (Main.instance.last_log_time..Main.instance.next_log_time))
       Main.instance.last_log_time = last_log.end_time
     end
@@ -78,8 +78,8 @@ module TimelogBaseModel
 
   def time_ranges_overlap?(range1, range2)
     (range1.first <= range2.first && range1.last  >= range2.last) ||
-    (range2.first <= range1.first && range2.last  >= range1.last) ||
-    (range1.first >= range2.first && range1.first <= range2.last) ||
-    (range1.last  >= range2.first && range1.last  <= range2.last)
+      (range2.first <= range1.first && range2.last  >= range1.last) ||
+      (range1.first >= range2.first && range1.first <= range2.last) ||
+      (range1.last  >= range2.first && range1.last  <= range2.last)
   end
 end

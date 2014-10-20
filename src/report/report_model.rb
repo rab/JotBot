@@ -31,7 +31,7 @@ class ReportModel
   end
 
   def report_list_empty?
-    return true if @reports.nil? || @reports.empty? 
+    return true if @reports.nil? || @reports.empty?
     return true if @reports.size == 1 and  @reports.first.report_id == -1
     false
   end
@@ -62,7 +62,7 @@ class ReportModel
 
   def emit_csv path
     require 'csv_emitter'
-#    export_data = CsvEmitter.new.emit_from_report_data(@report_data)
+    #    export_data = CsvEmitter.new.emit_from_report_data(@report_data)
     faster_export_data = CsvEmitter.new.faster_emit_from_report_data(@report_data)
     File.open(path, "w") do |file|
       #file << export_data
@@ -129,14 +129,14 @@ class ReportModel
 
   def wrap_log_in_struct(log, add_as_child)
     OpenStruct.new( :database_id => log.id,
-                   :date => log.start_time,
-                   :category => log.category.name,
-                   :log => log.text,
-                   :duration => log.duration_in_hours,
-                   :duration_seconds => log.duration_in_seconds,
-                   :billable => log.billable,
-                   :children => add_as_child ? [wrap_log_in_struct(log, false)] : []
-                  )
+                    :date => log.start_time,
+                    :category => log.category.name,
+                    :log => log.text,
+                    :duration => log.duration_in_hours,
+                    :duration_seconds => log.duration_in_seconds,
+                    :billable => log.billable,
+                    :children => add_as_child ? [wrap_log_in_struct(log, false)] : []
+                    )
   end
 
   def build_category(categories, rows, category)
@@ -146,12 +146,12 @@ class ReportModel
     sub_categories.reject! { |sub_category| sub_category.children.empty? and sub_category.sub_categories.empty? }
 
     OpenStruct.new( :name => category.name,
-                   :sub_categories => sub_categories,
-                   :children => children,
-                   :duration => 0.0 + 
-                   sub_categories.inject(0.0){|sum, e| sum + e.duration} + 
-                   children.inject(0){|sum, e| sum + e.duration}
-                  )
+                    :sub_categories => sub_categories,
+                    :children => children,
+                    :duration => 0.0 +
+                    sub_categories.inject(0.0){|sum, e| sum + e.duration} +
+                    children.inject(0){|sum, e| sum + e.duration}
+                    )
   end
 
   def find_sub_categories(categories, category_name)

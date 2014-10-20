@@ -18,12 +18,12 @@ class UpdateManager
     javax.swing.JOptionPane.showMessageDialog(nil, "There is a new version of JotBot available.\nPlease visit http://www.getjotbot.com/download")
   end
 
- # See if there is a newer version, and take some action is there is
+  # See if there is a newer version, and take some action is there is
   def check
     begin
       current_version = JOTBOT_VERSION.gsub('.', '').to_i
       web_version = 0
-      timeout(10) do 
+      timeout(10) do
         open(CURRENT_VERSION_URL, :proxy => nil) do |f|
           web_version = parse_api_data(f.read)[:version]
         end
@@ -54,7 +54,6 @@ class UpdateManager
     text.strip!
     {:version => text.to_i}
   end
-
 
   # Previous code that would kick off Getdown.
   # Deprecated until Vista issuesa re resolved
@@ -93,4 +92,3 @@ class UpdateManager
   #  end
   #end
 end
-

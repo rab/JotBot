@@ -1,11 +1,10 @@
-
 require 'category'
 
 class CategoryEditorModel
-  attr_accessor :selected_category_name, :selected_category_billable_status , 
-                :selected_category_active_status , :selected_category_primary_id
+  attr_accessor :selected_category_name, :selected_category_billable_status ,
+  :selected_category_active_status , :selected_category_primary_id
 
-  def CategoryEditorModel.create_intermediates(category_segments, attributes )
+  def self.create_intermediates(category_segments, attributes )
     until category_segments.empty?
       name = category_segments.join(':')
       c = Category.find(:name =>  name )
@@ -17,19 +16,18 @@ class CategoryEditorModel
     end
   end
 
-
   def update(category_id, attributes)
-    Category.raise_on_save_failure = true    
+    Category.raise_on_save_failure = true
     category = Category.find(:id => category_id )
     begin
-      category.update(attributes) 
+      category.update(attributes)
     rescue Exception => e
       warn "Error updating attributes on #{category.name}, #{attributes.inspect}: #{e.inspect}"
       warn category.inspect
-      raise e 
+      raise e
     end
 
-    Category.raise_on_save_failure = false    
+    Category.raise_on_save_failure = false
 
     if attributes[:name] =~ /:/
       segments = attributes[:name].split(':')
@@ -78,12 +76,11 @@ class CategoryEditorModel
     @selected_category_billable_status = @categories[@selected_category_name] ? @categories[@selected_category_name].billable : true
     @selected_category_active_status = @categories[@selected_category_name ] ? @categories[@selected_category_name ].active : true
     pid = @categories[@selected_category_name ] ? @categories[@selected_category_name ].id : 0
-    @selected_category_primary_id = pid 
+    @selected_category_primary_id = pid
   end
 
-
-  def selected_category_active_status 
-    @selected_category_active_status 
+  def selected_category_active_status
+    @selected_category_active_status
   end
 
   def selected_category_active_status=(status)
@@ -93,8 +90,8 @@ class CategoryEditorModel
     @selected_category_active_status  = status
   end
 
-  def selected_category_primary_id 
-    @selected_category_primary_id 
+  def selected_category_primary_id
+    @selected_category_primary_id
   end
 
   def selected_category_name
@@ -111,9 +108,7 @@ class CategoryEditorModel
     set_attributes
   end
 
-
-
-  #def selected_category_billable_status 
+  #def selected_category_billable_status
   #  if c = Category.find(:all, :condition => "name = #{@selected_category_name}")
   #    c.billable_status
   #  else
@@ -121,7 +116,7 @@ class CategoryEditorModel
   #  end
   #end
 
-  #def selected_category_billable_status=(billable_status) 
+  #def selected_category_billable_status=(billable_status)
   #     if c = Category.find(:all, :condition => "name = #{@selected_category_name}")
   #    c.update_attributes :billable_status =>  billable_status
   #  else
@@ -133,17 +128,14 @@ class CategoryEditorModel
   #  @categories[@selected_category_name] = "#{billable_status }||#{selected_category_active_status}"
   #end
 
-
   #def selected_category_active_status=(active_status)
   #  selected_category_billable_status = eval(@categories[@selected_category_name].split('||').first)
-  #  selected_category_active_status  = active_status  
+  #  selected_category_active_status  = active_status
   #  @categories[@selected_category_name] = "#{selected_category_active_status}||#{selected_category_active_status}"
   #end
-
 
   #def selected_category_active_status
   #  return true unless @selected_category_name || @categories[@selected_category_name].to_s.strip.empty?
   #  eval(@categories[@selected_category_name].split('||').last)
   #end
 end
-

@@ -13,7 +13,7 @@ class TimelogEditController < TimelogBaseController
       model.populate_from_defaults
     end
   end
-  
+
   def log_button_action_performed
     update_all_model_properties
     if continue_saving_record?
@@ -23,7 +23,7 @@ class TimelogEditController < TimelogBaseController
     end
   end
 
-private
+  private
   # Also used by ensure_end_time_is_after_start_time in timelog_base_controller
   def update_all_model_properties
     update_model(view_model, :start_time, :end_time, :message, :selected_category, :billable, :details)

@@ -1,19 +1,19 @@
 class FilterSelectionController < ApplicationController
   set_model 'FilterSelectionModel'
   set_view 'FilterSelectionView'
-  
+
   def load
     model.load_reports
   end
-  
+
   def on_report_selection_changed(&block)
     @report_selection_callback = block
   end
-  
+
   def selected_report_combo_box_item_state_changed(event)
     return unless event.state_change == java.awt.event.ItemEvent::SELECTED
     model.current_report = event.item
-    
+
     if model.current_report == FilterSelectionModel::EMPTY_REPORT
       edit_button_action_performed
     else
@@ -30,7 +30,7 @@ class FilterSelectionController < ApplicationController
       @report_selection_callback.call
     end
   end
-  
+
   def edit_button_action_performed
     ReportEditorController.instance.open(model.current_report) do |modified_report|
       model.load_reports

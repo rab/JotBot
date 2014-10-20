@@ -11,7 +11,7 @@ class TimelogEditModel
     @categories = {}
 
     messages = Timelog.dataset.limit(10).order(:start_time.desc).all
-    
+
     if messages.size > 0
       @previous_messages = messages.map{|message| message.text}
       @message = @previous_messages.first

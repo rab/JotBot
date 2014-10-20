@@ -22,7 +22,9 @@ task 'rawr:bundle:exe' => :create_digest
 
 desc "Run all unit specs"
 Spec::Rake::SpecTask.new do |t|
+  t.libs << File.expand_path(File.dirname(__FILE__) + "/lib/ruby")
   t.libs << File.expand_path(File.dirname(__FILE__) + "/src")
+  t.libs << File.expand_path(File.dirname(__FILE__) + "/src/report")
   t.libs << File.expand_path(File.dirname(__FILE__) + "/test/unit")
   t.spec_files = FileList['test/unit/**/*_spec.rb']
   t.ruby_opts = ['-rtime', '-Isrc'] # Super class error unless we force loading time before any AR stuff
@@ -33,7 +35,7 @@ end
 task 'rawr:bundle:app' => [:write_revision_info, :basic_bundle]
 task 'rawr:bundle:exe' => [:write_revision_info, :basic_bundle]
 
-task :write_revision_info do 
+task :write_revision_info do
   version_rb_file = 'package/jar/revision.txt'
 
   warn "Writing repo revision info!"

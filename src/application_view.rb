@@ -1,6 +1,6 @@
 include_class 'javax.swing.event.ListDataEvent'
 
-# Implements the same interface as DefaultComboBoxModel but filters list based on 
+# Implements the same interface as DefaultComboBoxModel but filters list based on
 # the contents of the JComboBox's text field
 class AutoCompletingComboBoxModel
   include Java::javax::swing::ComboBoxModel
@@ -40,7 +40,7 @@ class AutoCompletingComboBoxModel
   end
   alias_method :remove_list_data_listener, :removeListDataListener
 
-  # Methods mimicing DefaultComboBoxModel interface  
+  # Methods mimicing DefaultComboBoxModel interface
   def addElement(item)
     puts "addElement(#{item})"
     @items << item
@@ -127,23 +127,23 @@ class AutoCompletingComboBoxModel
 
     @filtered_items = @items if @filtered_items.empty?
     javax.swing.SwingUtilities.invoke_later(Monkeybars::TaskProcessor::Runnable.new do
-      @component.editor.editor_component.document.disable_handlers :document do
-        alert_listeners :contents_changed, 0, @items.length - 1
-        @component.editor.item = original_text unless 0 == original_list_size
-      end
-    end)
+                                              @component.editor.editor_component.document.disable_handlers :document do
+                                                alert_listeners :contents_changed, 0, @items.length - 1
+                                                @component.editor.item = original_text unless 0 == original_list_size
+                                              end
+                                            end)
   end
 
   def filter_list_and_show_popup
     javax.swing.SwingUtilities.invoke_later(Monkeybars::TaskProcessor::Runnable.new do
-      @component.hide_popup
-    end)
+                                              @component.hide_popup
+                                            end)
 
     filter_list
 
     javax.swing.SwingUtilities.invoke_later(Monkeybars::TaskProcessor::Runnable.new do
-      @component.show_popup
-    end)
+                                              @component.show_popup
+                                            end)
   end
 
   def alert_listeners(type, start_index, end_index)
@@ -172,7 +172,7 @@ class ApplicationView < Monkeybars::View
 
   def time_to_date(time)
     # This breaks if passed a JavaSQL timestamp unless we catch that ...
-    case time.class.to_s 
+    case time.class.to_s
     when "Java::JavaSql::Timestamp"
       milliseconds = time.time + (time.nanos / 1000000)
       java.util.Date.new(milliseconds)
@@ -197,9 +197,9 @@ class ApplicationView < Monkeybars::View
     #
     return text if text.nil?
     text.strip!
-    # Sometimes we get just the time.  
+    # Sometimes we get just the time.
     # TODO If "just the time" is OK, then perhaps we should simply
-    # strip any date part, rather than try to fix it? Think about it.  
+    # strip any date part, rather than try to fix it? Think about it.
     text = reparse_date_string(text) if is_date_string?(text)
     Time.parse(text)
   end
@@ -242,14 +242,14 @@ class ApplicationView < Monkeybars::View
 
   def background_error_color_for(component)
     #    java.awt.Color.new(255, 60, 60)
-    java.awt.Color.new(component.red, 
-                       component.green - 80 < 0 ? 0 : component.green - 80, 
+    java.awt.Color.new(component.red,
+                       component.green - 80 < 0 ? 0 : component.green - 80,
                        component.blue - 80 < 0 ? 0 : component.blue - 80)
   end
 
   def foreground_error_color_for(component)
-    java.awt.Color.new(component.red + 128 < 255 ? component.red + 128 : 255, 
-                       component.green, 
+    java.awt.Color.new(component.red + 128 < 255 ? component.red + 128 : 255,
+                       component.green,
                        component.blue)
   end
 

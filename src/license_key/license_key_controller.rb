@@ -6,7 +6,7 @@ class LicenseKeyController < ApplicationController
   add_listener :type => :document, :components => {"license_key_text.document" => "license_key_text"}
 
   def load(options = {})
-    @options = options 
+    @options = options
     if File.exists? Configuration.license_key_file
       # Need is in order to validate key
       model.license_key = File.read(Configuration.license_key_file)
@@ -39,7 +39,7 @@ class LicenseKeyController < ApplicationController
   end
 
   # We have some labels that need to act as links.
-  # The current plan is that the lable text should be only the link.
+  # The current plan is that the label text should be only the link.
   # On the one hand, if we can grab that URL from the label we can avoid having
   # to keep the view and actual ink in sync
   # On the other, do we want the controller to do that?
@@ -49,7 +49,7 @@ class LicenseKeyController < ApplicationController
   end
 
   def trial_link_label_mouse_entered
-   signal :hand_cursor
+    signal :hand_cursor
   end
 
   def trial_link_label_mouse_released
@@ -71,7 +71,7 @@ class LicenseKeyController < ApplicationController
         unless trim_email_contents(view_model.license_key).strip.empty?
           default_ok
         end
-      else 
+      else
         default_ok
       end
     else
@@ -101,7 +101,7 @@ class LicenseKeyController < ApplicationController
     end
   end
 
-  # Gets rid of anything other than the actual license key by looking for 
+  # Gets rid of anything other than the actual license key by looking for
   # lines starting with === and removing everything above the first one
   # and below the second one. What is in-between is assumed to be the
   # license key.

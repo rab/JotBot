@@ -6,16 +6,17 @@ class XmlEmitter
   include Neurogami::TimeHelpers
 
   def emit_from_report_data(report_data, file)
-    xml = Builder::XmlMarkup.new(:target => file, :indent => 2)
-    xml.instruct!(:xml, :encoding => "UTF-8")
-    xml.report do
-      report_data.each do |category|
-        emit_item(xml, category)
+    xml_builder = Builder::XmlMarkup.new(:target => file, :indent => 2)
+    xml_builder.instruct!(:xml, :encoding => "UTF-8")
+    xml_builder.categories do |xml|
+        report_data.each do |category|
+          emit_item(xml, category)
+        end
       end
     end
     xml
   end
- 
+
   def emit_item(xml, item)
     if (item.name.nil? || item.name.empty?)
       emit_log xml, item
@@ -23,7 +24,7 @@ class XmlEmitter
       emit_category xml, item
     end
   end
-  
+
   def emit_category(xml, category)
     xml.category do
       xml.name  category.name
@@ -34,7 +35,7 @@ class XmlEmitter
       end
     end
   end
-  
+
   def emit_log(xml, log)
     duration = hours_to_hours_minutes_seconds log.duration
 

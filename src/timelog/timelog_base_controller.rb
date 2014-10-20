@@ -1,4 +1,4 @@
-class TimelogBaseController < ApplicationController  
+class TimelogBaseController < ApplicationController
   def log_item_state_changed event
     return unless (event.state_change == java.awt.event.ItemEvent::SELECTED) && (view_transfer[:log_index] != -1)
 
@@ -19,10 +19,10 @@ class TimelogBaseController < ApplicationController
     category = Category.find(:name => view_model.selected_category)
     return if category.nil?
     transfer[:billable] = category.billable
-    signal :update_billable    
+    signal :update_billable
   end
 
-  def continue_saving_record? 
+  def continue_saving_record?
     if model.selected_is_new_category?
       signal :show_category_creation_prompt do |result|
         if 0 == result # Pressing of "Yes" button

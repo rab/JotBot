@@ -5,7 +5,7 @@ require 'time'
 class Timelog < Sequel::Model
 
   belongs_to :category
-#  has_many :timelog_details
+  #  has_many :timelog_details
   validates_presence_of :text
   validates_presence_of :start_time
   validates_presence_of :end_time

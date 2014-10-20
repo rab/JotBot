@@ -5,14 +5,14 @@ class PdfEmitter
     array = to_array data
     Prawn::Document.generate path do |pdf|
       pdf.table array,
-                :position           => :center,
-                :headers            => ["Category", "Log", "Time", "Duration", "Billable?"],
-                :row_colors         => ["ffffff","ffff00"],
-                :vertical_padding   => 5,
-                :horizontal_padding => 3
+      :position           => :center,
+      :headers            => ["Category", "Log", "Time", "Duration", "Billable?"],
+      :row_colors         => ["ffffff","ffff00"],
+      :vertical_padding   => 5,
+      :horizontal_padding => 3
     end
   end
-  
+
   def to_array(report_data, array=[])
     if report_data.respond_to? :each
       report_data.each do |category|

@@ -11,12 +11,12 @@ class TimelogBaseView < ApplicationView
     log_details.setFocusTraversalKeys(KeyboardFocusManager::FORWARD_TRAVERSAL_KEYS, forward_set)
     log_details.setFocusTraversalKeys(KeyboardFocusManager::BACKWARD_TRAVERSAL_KEYS, backward_set)
   end
-  
+
   def populate_category_list(categories)
     #AutoCompletingComboBoxModel.new(category, categories.keys)
     javax.swing.DefaultComboBoxModel.new(categories.keys.to_java(:Object))
   end
-  
+
   def populate_time_combo_boxes
     time_array = []
 
@@ -27,7 +27,7 @@ class TimelogBaseView < ApplicationView
         end
       end
     end
-    
+
     start_time_combo_box.model = javax.swing.DefaultComboBoxModel.new(time_array.to_java(:Object))
     end_time_combo_box.model = javax.swing.DefaultComboBoxModel.new(time_array.to_java(:Object))
   end
@@ -38,11 +38,11 @@ class TimelogBaseView < ApplicationView
       model.previous_messages.each {|message| log.add_item message}
     end
   end
-  
+
   def date_button_action_performed
     date_picker_panel.collapsed = date_picker_panel.collapsed? ? false : true
   end
-  
+
   def details_button_action_performed
     log_details_panel.collapsed = !log_details_panel.collapsed?
   end
@@ -60,21 +60,21 @@ class TimelogBaseView < ApplicationView
   def done_animating_pane event
     repack_main_view_component if ('animationState' == event.property_name) and ('expanded' == event.new_value or 'collapsed' == event.new_value)
   end
-  
+
   alias_method :date_picker_panel_property_change, :done_animating_pane
   alias_method :log_details_panel_property_change, :done_animating_pane
-  
+
   def combo_box_changed(event)
     return unless event.state_change == java.awt.event.ItemEvent::SELECTED
     validate
   end
-  
+
   alias_method :end_time_combo_box_item_state_changed, :combo_box_changed
   alias_method :start_time_combo_box_item_state_changed, :combo_box_changed
-    
+
   def validate
     error_found = false
-    
+
     if log.editor.editor_component.text.strip.empty?
       set_border_error_coloring_for log
       error_found = true
@@ -88,7 +88,7 @@ class TimelogBaseView < ApplicationView
     else
       clear_border_error_coloring_for category
     end
-    
+
     if start_time_combo_box.visible && end_time_combo_box.visible
       start_date = Calendar.instance
       start_date.time = start_date_picker.date
@@ -112,37 +112,37 @@ class TimelogBaseView < ApplicationView
   alias_method :category_remove_update, :validate
   alias_method :start_date_picker_action_performed, :validate
   alias_method :end_date_picker_action_performed, :validate
-  
+
   def show_category_prompt(model, transfer)
-    result = javax.swing.JOptionPane.showConfirmDialog(@main_view_component, 
-            "The category #{model.selected_category} does not exist, create it and any of its new parent categories?", 
-            'Create a new category?',
-            javax.swing.JOptionPane::YES_NO_OPTION)
+    result = javax.swing.JOptionPane.showConfirmDialog(@main_view_component,
+                                                       "The category #{model.selected_category} does not exist, create it and any of its new parent categories?",
+                                                       'Create a new category?',
+                                                       javax.swing.JOptionPane::YES_NO_OPTION)
     yield(result)
   end
-  
+
   def get_current_category_text(incorrect_view_value)
     # category.selected_item doesn't work correctly when the current text has been edited
     category.editor.editor_component.text
   end
-  
+
   def get_current_log_text(incorrect_view_value)
     # category.selected_item doesn't work correctly when the current text has been edited
     log.editor.editor_component.text
   end
-  
+
   def update_billable_value(model, transfer)
     billable.selected = transfer[:billable]
   end
-  
+
   def reload_configuration(model, transfer)
-     @main_view_component.always_on_top = Configuration.always_on_top
+    @main_view_component.always_on_top = Configuration.always_on_top
   end
-  
+
   def repack_main_view_component#(model, transfer)
     @main_view_component.pack
   end
-  
+
   def set_on_top
     @main_view_component.always_on_top = Configuration.always_on_top
   end

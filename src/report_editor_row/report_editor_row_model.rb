@@ -2,18 +2,18 @@ class ReportEditorRowModel
   # Date format for filter is year/month/date (all 1 based, Jan = 1, Feb = 2)
 
   attr_accessor :type, :selected_parameter, :text_parameter
-  
+
   DEFINED_DATE_TYPES = ["today", "yesterday", "this week", "last week", "this month", "last month", "this year", "last year"]
-#  ADDITIONAL_SELECTION_DATE_TYPES = ['is', 'is not', 'after', 'before', 'within', 'not within']
+  #  ADDITIONAL_SELECTION_DATE_TYPES = ['is', 'is not', 'after', 'before', 'within', 'not within']
   ADDITIONAL_SELECTION_DATE_TYPES = ['is', 'is not', 'after', 'before'] #TODO: enable within/not within in report filter generation
   CATEGORY_SELECTION_TYPES = ['is', 'is not', 'contains', 'does not contain']
   BILLABLE_SELECTION_TYPES = ['yes', 'no']
-  
+
   def initialize
     @type = "date"
     @selected_parameter = "today"
   end
-  
+
   def from_filter(filter)
     @type = filter.filter_type
     case @type
@@ -36,12 +36,12 @@ class ReportEditorRowModel
           break
         end
       end
-      
+
     when "billable"
       @selected_parameter = true == filter.parameter ? "yes" : "no"
     end
   end
-  
+
   def to_filter
     filter = ReportFilter.new
     filter.filter_type = @type.downcase

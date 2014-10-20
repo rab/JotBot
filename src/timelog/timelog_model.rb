@@ -39,19 +39,15 @@ class TimelogModel
     @start_time = t
   end
 
-
   def end_time=(t)
     LOGGER.info " Cannot set end_time to nil, called  #{caller_method_name}" if t.nil?
     raise "Cannot set end_time to nil" if t.nil?
     @end_time = t
   end
 
-
-
   def start_time
     @start_time
   end
-
 
   def end_time
     @end_time
@@ -69,7 +65,6 @@ class TimelogModel
     end
   end
 
-
   def add_to_queue(start_time, end_time)
     @interval_queue << [start_time, end_time]
     @start_time = @interval_queue.first.first
@@ -81,12 +76,12 @@ class TimelogModel
 
   def save
     log = Timelog.new :text => @message.strip,
-      :start_time => @start_time,
-      :end_time => @end_time,
-      :duration_in_seconds => duration_in_seconds,
-      :billable => @billable,
-      :category => Category.find(:name => @selected_category),
-      :details => @details
+    :start_time => @start_time,
+    :end_time => @end_time,
+    :duration_in_seconds => duration_in_seconds,
+    :billable => @billable,
+    :category => Category.find(:name => @selected_category),
+    :details => @details
 
     log = update_existing_log_or_save log
 
@@ -103,9 +98,10 @@ class TimelogModel
   end
 
   private
-  def clear_all_entries_up_to_current_entry 
+
+  def clear_all_entries_up_to_current_entry
     if 1 == @interval_queue.size
-      @interval_queue.clear 
+      @interval_queue.clear
     else
       @interval_queue.reject! do |interval|
         # We want to remove all intervals that fall inside the selected log interval

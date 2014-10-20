@@ -99,12 +99,12 @@ class Main
   end
 
   def run
-    
+
     SystemTrayController.instance.open
 
     loop do
       time = Time.now.round_seconds_down
-      if (time - @last_log_time) >= Configuration.popup_interval_in_seconds 
+      if (time - @last_log_time) >= Configuration.popup_interval_in_seconds
         add_new_log_interval(@last_log_time, time)
       end
       sleep(1)
@@ -159,7 +159,7 @@ def show_error_dialog_and_exit(exception, thread=nil)
   end
   LOGGER.fatal(stack_trace)
   title = "Application Error"
-  message = "The application has encountered a critical error, and must shut down." 
+  message = "The application has encountered a critical error, and must shut down."
   message << "\n\n#{bug_reporting}"
   if exception.message =~ /Database may be already in use/i
     title = "Error starting JotBot"
@@ -184,11 +184,10 @@ GlobalErrorHandler.on_error {|exception, thread| show_error_dialog_and_exit(exce
 
 begin
   warn "$: = #{$:.sort.join("\n")}"
-#  require 'druby' 
- # Invoker.run       # TODO What to do with this?
+  #  require 'druby'
+  # Invoker.run       # TODO What to do with this?
   Main.instance.run
-  
+
 rescue => e
   show_error_dialog_and_exit(e)
 end
-

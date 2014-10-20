@@ -10,7 +10,7 @@ class OptionsEditorController < ApplicationController
       LOGGER.error e
       LOGGER.error e.backtrace
       signal :error_while_saving
-    end      
+    end
     close
   end
 end

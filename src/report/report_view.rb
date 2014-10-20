@@ -17,19 +17,19 @@ class ReportTreeTableModel < DefaultTreeTableModel
     @row_data = Hash.new {|h,k| h[k] = ["Name", "", "", ""]}
     @columns = ["Log", "Date", "Time", "Billable"]
   end
-  
+
   def getColumnCount
     @columns.size
   end
-  
+
   def getColumnName(index)
     @columns[index]
   end
-  
+
   def getValueAt(node, column)
     @row_data[node][column]
   end
-  
+
   def setValueAt(value, node, column)
     @row_data[node][column] = value
   end
@@ -43,16 +43,16 @@ class ReportView < ApplicationView
   map :view => "report_table.tree_selection_model", :transfer => :selected_log_id, :using => [nil, :get_selected_id]
   map :view => "export_type_combo_box.selected_item", :transfer => :export_type, :translate_using => EXPORT_TYPE_TRANSLATION
   nest :sub_view => :filter, :using => [:add_filter_selection_panel, :remove_filter_selection_panel]
-  
+
   raw_mapping :to_table, nil
   raw_mapping :revalidate, nil
 
   define_signal :name => :get_export_path,     :handler => :prompt_user_for_export_path
-  
+
   def load
     set_frame_icon 'images/jb_clock_icon_16x16.png'
     report_panel.remove(report_scroll_pane)
-    
+
     blur_effect = BufferedImageOpEffect.new([BlurFilter.new].to_java('java.awt.image.BufferedImageOp'))
     @report_panel_wrapper = JXLayer.new(report_scroll_pane, BusyPainterUI.new(blur_effect))
 
@@ -63,17 +63,17 @@ class ReportView < ApplicationView
     @set_value_at = report_table.tree_table_model.method("setValueAt") #fix for JRuby incorrectly selecting base class version instead of subclass
     move_to_center
   end
-  
+
   def add_filter_selection_panel(nested_view, nested_component, model, transfer)
     filter_wrapper_panel.remove_all
     filter_wrapper_panel.add(nested_component)
-    
+
     self.filter_selection_panel = nested_component
   end
-  
+
   # The report data is loading on a background thread and will call update_view when it completes
   def on_first_update(model, transfer); end
-  
+
   def to_table(model, transfer)
     root_node = DefaultMutableTreeTableNode.new("root node")
     report_table.tree_table_model.set_root(root_node)
@@ -84,40 +84,40 @@ class ReportView < ApplicationView
 
     set_column_widths
   end
-  
+
   def revalidate(model, transfer)
     report_scroll_pane.validate
   end
-  
+
   def get_selected_id(tree_model)
     return nil if tree_model.selection_path.nil?
     tree_model.selection_path.last_path_component.user_object
   end
-  
+
   define_signal :name => :show_busy_indicator, :handler => :show_busy_spinner
   def show_busy_spinner(model, transfer)
     on_edt { @report_panel_wrapper.ui.locked = true }
   end
-  
+
   define_signal :name => :hide_busy_indicator, :handler => :hide_busy_spinner
   def hide_busy_spinner(model, transfer)
     on_edt { @report_panel_wrapper.ui.locked = false }
   end
-  
+
   define_signal :name => :position_details, :handler => :create_position_struct
   Struct.new("Position", :x, :y, :width, :height)
   def create_position_struct(model, transfer)
     yield(Struct::Position.new(x, y, width, height))
   end
-  
+
   def prompt_user_for_export_path model, transfer
     #  src/report/report_view.rb:115:in `prompt_user_for_export_path': cannot convert instance
     #  of class org.jruby.RubyString to class java.io.File (TypeError)
-    
-     file_chooser = Java::javax::swing::JFileChooser.new  "#{Configuration.default_report_directory}"
 
-#    file_chooser.current_directory = Configuration.default_report_directory 
-    
+    file_chooser = Java::javax::swing::JFileChooser.new  "#{Configuration.default_report_directory}"
+
+    #    file_chooser.current_directory = Configuration.default_report_directory
+
     selected_file = Java::java::io::File.new "#{model.default_export_file.gsub(' ', '_')}.#{transfer[:export_type]}"
     file_chooser.selected_file = selected_file
     result = file_chooser.show_save_dialog @main_view_component
@@ -128,8 +128,8 @@ class ReportView < ApplicationView
     end
   end
 
-private
-  
+  private
+
   def add_logs(category_node, logs)
     logs.reverse.each do |log|
       node = DefaultMutableTreeTableNode.new
@@ -145,7 +145,7 @@ private
       end
     end
   end
-  
+
   def add_sub_categories(parent_node, row_object)
     node = DefaultMutableTreeTableNode.new
     report_table.tree_table_model.insert_node_into(node, parent_node, 0)
@@ -156,7 +156,7 @@ private
 
     row_object.sub_categories.each {|sub_category| add_sub_categories(node, sub_category)}
   end
-  
+
   def set_column_widths
     column_model = report_table.column_model
     column_model.getColumn(0).setPreferredWidth(300)

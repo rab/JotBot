@@ -2,7 +2,7 @@ class FilterSelectionModel
   attr_reader :reports, :current_report
   Struct.new("EmptyReport", :name, :id)
   EMPTY_REPORT = Struct::EmptyReport.new("Add custom filter", -1)
-  
+
   def load_reports
     @reports = Report.dataset.order(:id).all || []
     @reports << EMPTY_REPORT
@@ -16,7 +16,7 @@ class FilterSelectionModel
   def current_report_is_empty?
     current_report.id == -1
   end
-  
+
   def current_report=(new_report)
     if new_report.kind_of? Report
       @current_report = new_report

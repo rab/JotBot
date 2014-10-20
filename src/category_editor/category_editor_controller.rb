@@ -21,13 +21,11 @@ class CategoryEditorController < ApplicationController
   end
 
   def save_button_action_performed
-
     #   update_model(view_model, :selected_category_billable_status, :selected_category_active_status)
     #   update_model(view_model, :selected_category_name)
-
     attributes = { :name      => view_model.selected_category_name,
-                   :billable  => view_model.selected_category_billable_status,
-                   :active    => view_model.selected_category_active_status }
+      :billable  => view_model.selected_category_billable_status,
+      :active    => view_model.selected_category_active_status }
 
     if view_model.selected_category_primary_id.to_i == 0
       begin

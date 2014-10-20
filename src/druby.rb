@@ -1,8 +1,7 @@
 require 'drb'
 
 class Invoker
-
-  URI ="druby://localhost:8787" 
+  URI ="druby://localhost:8787"
 
   def ping
     true
@@ -23,4 +22,3 @@ class Invoker
     warn DRb.uri
   end
 end
-

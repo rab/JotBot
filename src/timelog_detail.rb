@@ -8,7 +8,7 @@ class TimelogDetail < Sequel::Model
 
   def new_record?
     new?
-  end	
+  end
 
   def start_time
     # We want to coerce this to a Ruby time
@@ -30,7 +30,7 @@ class TimelogDetail < Sequel::Model
     string
   end
 
-private
+  private
 
   def sql_timestamp_to_time(ts)
     return ts if ts.is_a?(Time)

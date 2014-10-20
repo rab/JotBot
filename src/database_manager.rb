@@ -7,9 +7,8 @@ class DatabaseManager
   include Singleton
 
   def initialize
-    @database = nil  
+    @database = nil
   end
-
 
   def setup_database
     database_location = Configuration.database_location
@@ -38,9 +37,9 @@ class DatabaseManager
   end
 
   def require_model_classes
-    %w{ report_filter 
+    %w{ report_filter
         report
-        timelog_detail 
+        timelog_detail
         timelog
         category
       }.each{|m| require m}

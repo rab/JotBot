@@ -1,11 +1,8 @@
 require 'fastercsv'
 require 'time_helpers'
 
-
 class CsvEmitter
-
   include Neurogami::TimeHelpers
-
 
   def windows_newline
     #"\n\r"
@@ -17,8 +14,8 @@ class CsvEmitter
     when :hours
       seconds_to_hours_decimal log.duration_seconds
     when :HHMMSS
-      seconds_to_hours_minutes_seconds( log.duration_seconds ) 
-    else 
+      seconds_to_hours_minutes_seconds( log.duration_seconds )
+    else
       seconds_to_hours_decimal log.duration_seconds
     end
   end
@@ -38,7 +35,7 @@ class CsvEmitter
         end
       end
     end
-  csv
+    csv
   end
 
   #def emit_from_report_data(report_data, csv='')

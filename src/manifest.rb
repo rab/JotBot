@@ -6,14 +6,13 @@ $here = File.expand_path(File.dirname(__FILE__))
 # The idea is to make sure the load path does not inadvertantly have
 # locations that depend on some particular machine or installation
 def restrict_load_path
- $:.dup.each do |path|
+  $:.dup.each do |path|
     next if path == '.'
     next if path == $here
     next if path =~ /jruby-complete.jar!/
-    $:.delete_if{ |i| i == path } 
- end
+    $:.delete_if{ |i| i == path }
+  end
 end
-
 
 restrict_load_path
 
@@ -70,11 +69,11 @@ module Kernel
   end
 
   def we_are_running_on_1_6_64bit?
-    is_java_64bit? && simple_java_version == '1.6' 
+    is_java_64bit? && simple_java_version == '1.6'
   end
 
   def should_use_java16_jdic?
-     we_are_running_on_1_6_64bit? || Platform.using_windows? 
+    we_are_running_on_1_6_64bit? || Platform.using_windows?
   end
 end
 
@@ -97,7 +96,7 @@ require 'application_view'
 #
 # Add your own application-wide libraries below.  To include jars, append to
 # $CLASSPATH, or use add_to_classpath, for example:
-# 
+#
 # $CLASSPATH << File.expand_path(File.dirname(__FILE__) + "/../lib/swing-layout-1.0.3.jar")
 #
 # or
@@ -108,9 +107,9 @@ require 'rubygems'
 case Monkeybars::Resolver.run_location
 when Monkeybars::Resolver::IN_FILE_SYSTEM
   add_to_load_path "../lib/ruby"
-#  add_to_load_path "../lib/ruby/fastercsv/lib"
- # add_to_load_path "../lib/ruby/prawn/lib"
- # add_to_load_path "../lib/ruby/prawn_layout/lib"
+  #  add_to_load_path "../lib/ruby/fastercsv/lib"
+  # add_to_load_path "../lib/ruby/prawn/lib"
+  # add_to_load_path "../lib/ruby/prawn_layout/lib"
   require 'platform'
   unless should_use_java16_jdic?
     add_to_classpath "../lib/java/jdic/jdic.jar"
@@ -121,7 +120,7 @@ when Monkeybars::Resolver::IN_FILE_SYSTEM
   add_to_classpath "../lib/java/jxlayer.jar"
   add_to_classpath "../lib/java/bcprov-jdk14-139.jar"
   add_to_classpath "../lib/java/bcmail-jdk14-139.jar"
-  
+
   add_to_load_path "../../lib/ruby"
   add_to_load_path "../../lib/java"
   add_to_load_path "../build/classes"

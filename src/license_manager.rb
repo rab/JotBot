@@ -34,10 +34,10 @@ END_KEY
 
   def private_key_path= private_key_path
     @private_key_path = private_key_path
-    @private_key = OpenSSL::PKey::RSA.new(File.read private_key_path) 
-  end 
+    @private_key = OpenSSL::PKey::RSA.new(File.read private_key_path)
+  end
 
-  def expiration_date 
+  def expiration_date
     return @expiration_date unless @expiration_date.nil?
     raise "Cannot check for epiration date without license text." if @encoded_key.nil?
     valid_license_text? @encoded_key
@@ -46,7 +46,7 @@ END_KEY
 
   # Validates encode file contents, and stores encode value in @encoded_key
   def valid_license_file? license_key_file
-    return false unless File.exists?(license_key_file)  
+    return false unless File.exists?(license_key_file)
 
     begin
       LOGGER.info "Loading license key file: #{license_key_file}"
@@ -99,7 +99,7 @@ END_KEY
           valid = false
           message = 'License is invalid or corrupt'
         end
-        
+
         if @expiration_date < Date.today
           valid = false
           message = "License key expired on #{@expiration_date.strftime("%B %d, %Y")}"
@@ -111,7 +111,7 @@ END_KEY
   end
 
   def valid_license_text?(text)
-    validate_license(text).first 
+    validate_license(text).first
   end
 
   def generate_signed_text(data)
@@ -122,16 +122,16 @@ END_KEY
   def make_key(user_details, expires=false )
     key = generate_signed_text(data_string(user_details, expires))
     LOGGER.debug  "Have key :\n#{key}"
-    key 
+    key
   end
 
   def data_string(user_details, expires=false)
     s = "Name: #{user_details[:full_name]}
 Company: #{user_details[:company]}
-License Version: #{user_details[:license_version]}  
+License Version: #{user_details[:license_version]}
 Email: #{user_details[:email]}"
 
-    s << "\nExpiration: #{user_details[:expiration_date]}" if expires 
+    s << "\nExpiration: #{user_details[:expiration_date]}" if expires
     s
   end
 

@@ -1,16 +1,15 @@
 require 'timelog_base_view'
 require 'debuggery'
 
-
 class TimelogView < TimelogBaseView
   include Neurogami::Debuggery
 
-  set_java_class 'timelog.TimeLogForm'  
+  set_java_class 'timelog.TimeLogForm'
 
   raw_mapping :set_previous_log_entries, nil
 
   map :view => "category.model", :model => :categories, :using => :populate_category_list
-#  map :view => "log_details.text", :model => :details, :using => [:set_log_details_content_and_visibility, :default]
+  #  map :view => "log_details.text", :model => :details, :using => [:set_log_details_content_and_visibility, :default]
   map :view => "log_details.text", :model => :details, :using => [nil, :default]
   map :view => "log.selected_item", :model => :message, :using => [:default, :get_current_log_text], :ignoring => :item
   map :view => "category.selected_item", :model => :selected_category, :using => [:to_category_selected_item, :get_current_category_text], :ignoring => :item
@@ -24,7 +23,7 @@ class TimelogView < TimelogBaseView
 
   raw_mapping :set_title, nil
 
-  define_signal :name => :interval_update,                      :handler => :process_interval_set 
+  define_signal :name => :interval_update,                      :handler => :process_interval_set
   define_signal :name => :add_to_queue,                         :handler => :add_to_queue
   define_signal :name => :process_interval_set_for_rendering,   :handler => :process_interval_set
   define_signal :name => :show_category_creation_prompt,        :handler => :show_category_prompt
@@ -34,23 +33,23 @@ class TimelogView < TimelogBaseView
   add_listener :type => :document, :components => {'log.editor.editor_component.document' => :log}
   add_listener :type => :document, :components => {'category.editor.editor_component.document' => :category}
 
-    def editable_load
+  def editable_load
     date_picker_panel.animated = false
     date_picker_panel.collapsed = true
     date_picker_panel.animated = true
-    
+
     start_time_label.visible = false
     start_time_combo_box.visible = true
     end_time_label.visible = false
     end_time_combo_box.visible = true
-    
-    populate_time_combo_boxes    
+
+    populate_time_combo_boxes
     enable_tab_navigation
     set_on_top
-    
+
     start_date_picker.editor.enabled = false
     end_date_picker.editor.enabled = false
-    
+
     move_to_center
     set_frame_icon 'images/jb_clock_icon_16x16.png'
     #enable_auto_complete_for_combo_box :category
@@ -60,17 +59,17 @@ class TimelogView < TimelogBaseView
   def load
     set_frame_icon 'images/jb_clock_icon_16x16.png'
     date_picker_panel.visible = false
-     date_button.visible = false
+    date_button.visible = false
     log_details_panel.animated = false
     log_details_panel.collapsed = true
     log_details_panel.animated = true
     @main_view_component.pack
-    
+
     enable_tab_navigation
     set_on_top
     move_to_center
   end
-  
+
   def on_first_update model, transfer
     begin
       category.editor.editor_component.document.disable_handlers :document do
@@ -93,12 +92,12 @@ class TimelogView < TimelogBaseView
   def process_interval_set model, transfer
     raise Exception, 'Empty interval' if model.interval_queue.nil? || model.interval_queue.empty?
 
-    if 1 == model.interval_queue.size 
+    if 1 == model.interval_queue.size
       start_time = model.interval_queue.first.first
       end_time = model.interval_queue.first.last
       render_single_interval model, transfer
     else
-      render_mulitple_intervals model, transfer 
+      render_mulitple_intervals model, transfer
     end
     set_on_top
   end
@@ -116,7 +115,7 @@ class TimelogView < TimelogBaseView
   end
 
   def render_mulitple_intervals model, transfer
-    swap_in_new_combo_values model 
+    swap_in_new_combo_values model
     model.start_time, model.end_time = model.interval_queue.first.first, model.interval_queue.last.last
     raise "Cannot have empty time values in Timelog view #{__LINE__}." if model.start_time.nil? || model.end_time.nil?
     set_title(model, transfer)
@@ -133,7 +132,7 @@ class TimelogView < TimelogBaseView
     LOGGER.info " Cannot have nil model times, called  #{caller_method_name}" if (model.start_time.nil? || model.end_time.nil? )
     raise "[ #{__FILE__}:#{__LINE__}] Cannot have nil model times in set_title." if (model.start_time.nil? || model.end_time.nil? )
 
-    if model.interval_queue.nil? || 1 == model.interval_queue.size 
+    if model.interval_queue.nil? || 1 == model.interval_queue.size
       title1.text = 'What did you do from'
 
       # Code, at times, is getting nil time values from the model

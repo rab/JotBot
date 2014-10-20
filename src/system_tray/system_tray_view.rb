@@ -3,7 +3,6 @@ unless should_use_java16_jdic?
   include_class 'org.jdesktop.jdic.tray.SystemTray'
 end
 
-
 include_class "javax.swing.JPopupMenu"
 include_class "javax.swing.JMenu"
 include_class "javax.swing.JMenuItem"
@@ -18,10 +17,7 @@ class SystemTrayView < ApplicationView
     "Fake!"
   end
 
-
   def create_native_components
-
-
     menu = java.awt.PopupMenu.new("JotBot")
     @next_update_menu_item = java.awt.MenuItem.new("Next Update at:", nil)
     def @next_update_menu_item.text=(s)
@@ -30,7 +26,6 @@ class SystemTrayView < ApplicationView
     def @next_update_menu_item.text
       self.label
     end
-
 
     @next_update_menu_item.enabled = false
     menu.add(@next_update_menu_item)
@@ -90,12 +85,10 @@ class SystemTrayView < ApplicationView
     @tray = java.awt.SystemTray.system_tray
     # @tray.always_on_top = true  # Doesn't seem to matter on Windows, where a problem was reported JGB
     tray_icon = java.awt.TrayIcon.new(ImageIcon.new(url).getImage, "JotBot", menu)
-    @tray.add tray_icon 
-
+    @tray.add tray_icon
   end
 
   def create_external_components
-
     menu = JPopupMenu.new("JotBot")
     @next_update_menu_item = JMenuItem.new("Next Update at:", nil)
     @next_update_menu_item.enabled = false
@@ -145,7 +138,6 @@ class SystemTrayView < ApplicationView
     @exit_menu_item.name = "exit_menu_item"
     menu.add(@exit_menu_item)
 
-
     if Configuration.on_linux?
       url = Java::org::rubyforge::rawr::Main.get_resource('images/jb_clock_icon_22x22.png')
     else
@@ -155,7 +147,6 @@ class SystemTrayView < ApplicationView
     @tray = SystemTray.default_system_tray
     tray_icon = TrayIcon.new(ImageIcon.new(url), "JotBot", menu)
     @tray.add_tray_icon tray_icon
-
   end
 
   def load
@@ -163,8 +154,6 @@ class SystemTrayView < ApplicationView
     # There are some behavioral issues with Java 1.6 64bit when using jdic, so
     # when needed we'll use the desktop stuff built-in if need be.
     should_use_java16_jdic? ? create_native_components : create_external_components
-
-
   end
 
   def show; end

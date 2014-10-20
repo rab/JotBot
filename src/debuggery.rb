@@ -14,6 +14,5 @@ module Neurogami
       end
     end
 
-
   end
 end
