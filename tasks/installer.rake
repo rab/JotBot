@@ -42,13 +42,13 @@ namespace :installer do
 
   desc "Make an installer for OS X"
   task :mac => 'rawr:bundle:app' do
-    require 'src/version'
+    require './src/version'
 
     puts "Creating Mac installer"
     volume_name = "JotBot"
     image_file_name = "JotBot.dmg"
 
-    require 'src/version'
+    require './src/version'
     versioned_image_file_name = "JotBot-#{JOTBOT_VERSION}-temp.dmg"
     FileUtils.cp image_file_name, versioned_image_file_name
     # this mounts the dmg
@@ -78,7 +78,7 @@ namespace :installer do
   task :win => [ :winconfig,  'rawr:clean', 'rawr:bundle:exe', :copy_windows_icon] do
 
 
-    require 'src/version'
+    require './src/version'
     require 'pp'
     File.open( "rawr_options2.txt", 'wb'){ |f|
       #f.puts  "rawr options \n" + Rawr::Options.data.pretty_inspect

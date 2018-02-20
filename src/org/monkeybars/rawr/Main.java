@@ -1,5 +1,4 @@
-package org.rubyforge.rawr;
-
+package org.monkeybars.rawr;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -7,12 +6,16 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.net.URL;
 
+
 import java.util.ArrayList;
 import org.jruby.Ruby;
 import org.jruby.RubyInstanceConfig;
 import org.jruby.javasupport.JavaEmbedUtils;
 
 public class Main {
+  public static void debuggery(String message) {
+    System.err.println("DEBUGGERY:" + message); // JGBDEBUG
+  }
 
   public static void main(String[] args) throws Exception {   
     RubyInstanceConfig config = new RubyInstanceConfig();
@@ -31,13 +34,14 @@ public class Main {
       }
     }
     catch(IOException ioe) {
-      System.err.println("IOException loading run configuration file '" + runConfigFile + "', using defaults: " + ioe);
+      System.err.println("Error loading run configuration file '" + runConfigFile + "', using defaults: " + ioe);
     }
     catch(java.lang.NullPointerException npe) {
-      System.err.println("NullPointerException loading run configuration file '" + runConfigFile + "', using defaults: " + npe );
+      System.err.println("Error loading run configuration file '" + runConfigFile + "', using defaults: " + npe );
     }
 
     for(String line : config_data) {
+
       String[] parts = line.split(":");
       if("main_ruby_file".equals(parts[0].replaceAll(" ", ""))) {
         mainRubyFile = parts[1].replaceAll(" ", "");
@@ -45,12 +49,14 @@ public class Main {
 
       if("source_dirs".equals(parts[0].replaceAll(" ", ""))) {
         String[] source_dirs = parts[1].split(";");
+
         for(String s : parts[1].split(";") ){
           String d = s.replaceAll(" ", "");
           runtime.evalScriptlet( "$: << '"+d+"/'" );
         }
       }
     }
+
     runtime.evalScriptlet("require '" + mainRubyFile + "'");
   }
 
@@ -70,5 +76,3 @@ public class Main {
     return(contents);
   }
 }
-
-

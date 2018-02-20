@@ -3,7 +3,7 @@ require 'rbconfig'
 class Platform
 
   @@operating_system = RbConfig::CONFIG['host_os']
-  
+
   class << self
 
     def using_unix?
@@ -39,11 +39,11 @@ class Platform
 
     def is_java_64bit?
       # Is this reliable  TODO Check this
-      RbConfig::CONFIG['target_cpu'] =~ /64/ 
+      RbConfig::CONFIG['target_cpu'] =~ /64/
     end
 
     def we_are_running_on_1_6_64bit?
-      is_java_64bit? && simple_java_version == '1.6' 
+      is_java_64bit? && simple_java_version == '1.6'
     end
 
     def should_use_java16_jdic?
@@ -52,4 +52,3 @@ class Platform
 
   end
 end
-

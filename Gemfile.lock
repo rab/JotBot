@@ -1,29 +1,41 @@
 GEM
   remote: https://rubygems.org/
-  remote: http://gems.neurogami.com/
   specs:
-    builder (3.2.2)
+    builder (3.2.3)
+    diff-lcs (1.3)
     fastercsv (1.5.5)
-    hoe (3.13.0)
-      rake (>= 0.8, < 11.0)
-    jruby-openssl (0.9.5-java)
+    hoe (3.16.2)
+      rake (>= 0.8, < 13.0)
+    jruby-openssl (0.9.21-java)
     monkeybars (1.1.2)
       rawr (>= 1.4.4)
       swingset (>= 0.3.0)
-    pdf-core (0.4.0)
-    prawn (1.3.0)
-      pdf-core (~> 0.4.0)
-      ttfunk (~> 1.4.0)
-    rake (10.3.2)
+    pdf-core (0.7.0)
+    prawn (2.2.2)
+      pdf-core (~> 0.7.0)
+      ttfunk (~> 1.5)
+    rake (12.3.0)
     rawr (1.6.4)
       rubyzip
       user-choices
-    rspec (1.3.0)
+    rspec (3.7.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
+    rspec-core (3.7.1)
+      rspec-support (~> 3.7.0)
+    rspec-expectations (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-mocks (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-support (3.7.1)
     rubyzip (1.1.6)
     s4t-utils (1.0.4)
       hoe (>= 1.3.0)
     swingset (0.4.2)
-    ttfunk (1.4.0)
+    ttfunk (1.5.1)
     user-choices (1.1.6.1)
       builder (>= 2.1.2)
       s4t-utils (>= 1.0.3)
@@ -38,5 +50,8 @@ DEPENDENCIES
   jruby-openssl
   monkeybars
   prawn
-  rawr (= 1.6.4)
-  rspec (= 1.3)
+  rawr
+  rspec
+
+BUNDLED WITH
+   1.16.1
